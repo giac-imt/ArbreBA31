@@ -22,7 +22,7 @@ public class Noeud
     /**
      * Constructeur avec arguments
      * @param ordre : ordre du noeud
-     * @param parent : parent du noeurd
+     * @param parent : parent du noeud
      */
     public Noeud(int ordre, Noeud parent)
     {
