@@ -2,14 +2,31 @@ package structure;
 
 public class Arbre {
 
-    private int valeur;  // Tableau des cles (valeurs)
+    /**
+     * Valeur présente dans le noeud
+     */
+    private int valeur;
 
-    private Arbre filsGauche, filsMilieu, filsDroit; //Tableau des noeuds enfants
+    /**
+     * Référence vers ses 3 enfants
+     */
+    private Arbre filsGauche, filsMilieu, filsDroit;
 
+    /**
+     * Constructeur noeud feuille
+     * @param valeur : Valeur à insérer dans le noeud
+     */
     public Arbre(int valeur) {
         this.valeur = valeur;
     }
 
+    /**
+     * Constructeur noeud interne
+     * @param val : Valeur à insérer dans le noeud
+     * @param fg : Fils gauche du noeud
+     * @param fm : Fils du milieu du noeud
+     * @param fd : Fils droit du noeud
+     */
     public Arbre(int val, Arbre fg, Arbre fm, Arbre fd) {
 
         this.valeur = val;  // Tableau de cles
@@ -19,6 +36,21 @@ public class Arbre {
         this.filsDroit = fd;
     }
 
+    public boolean recherche(int valeur) {
+        if (valeur == getValeur())
+            return true;
+        if ((valeur < getValeur()) && (getFilsGauche() != null))
+            return (getFilsGauche().recherche(valeur));
+        if( (getFilsMilieu() != null) && (getFilsGauche() != null) && (getFilsDroit() != null) && (valeur > getValeur()) && (valeur < getFilsDroit().getValeur()))
+            return (getFilsMilieu().recherche(valeur));
+        if ((valeur > getValeur()) && (getFilsDroit() != null))
+            return (getFilsDroit().recherche(valeur));
+        return false;
+    }
+
+    /**
+     * Parcours prefixe de l'arbre
+     */
     public void parcoursPrefixe(){
         System.out.println(getValeur());
         if(getFilsGauche() != null)
@@ -29,6 +61,9 @@ public class Arbre {
             getFilsDroit().parcoursPrefixe();
     }
 
+    /**
+     * Parcours postfixe de l'arbre
+     */
     public void parcoursPostFixe(){
         if(getFilsGauche() != null)
             getFilsGauche().parcoursPrefixe();
@@ -39,6 +74,9 @@ public class Arbre {
         System.out.println(getValeur());
     }/**/
 
+    /**
+     * Getters
+     */
     public int getValeur() {
         return valeur;
     }

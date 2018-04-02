@@ -18,5 +18,7 @@ public class Main {
 
         System.out.println("Parcours postfixe :");
         test.parcoursPostFixe();
+
+        System.out.println("7 est-il présent dans l'arbre ? " +  test.recherche(7));
     }
 }
