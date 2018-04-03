@@ -21,8 +21,8 @@ public class Main {
         enf1.setEnfants(enfantsEnf1);
 
         System.out.println("Parcours prefixe :");
-        racine.parcoursPrefixe();
+        //racine.parcoursPrefixe();
 
-        //System.out.println("7 est-il présent dans l'arbre ? " +  test.recherche(7));
+        System.out.println("7 est-il présent dans l'arbre ? " +  racine.recherche(10));
     }
 }

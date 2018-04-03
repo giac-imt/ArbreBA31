@@ -1,6 +1,8 @@
 package structure;
 
 public class Arbre {
+    //TODO : commentaires
+    //TODO : ajouter feuilles partout
     /**
      * Nombre de clés maximum d'un noeud
      */
@@ -17,9 +19,6 @@ public class Arbre {
      * Référence vers ses enfants
      */
     private Arbre[] enfants = new Arbre[max_cles + 1];
-
-    public Arbre() {
-    }
 
     public Arbre(int valeur){
         this.valeurs[0] = valeur;
@@ -38,7 +37,22 @@ public class Arbre {
     }
 
     public boolean recherche(int valeur) {
+        int valGauche = this.getValeurs()[0];
+        int valDroite = this.getValeurs()[1];
 
+        if(valeur == valGauche || valeur == valDroite){
+            return true;
+        }
+
+        if((this.getEnfants()[0] != null) && (valeur < valGauche)){
+            return this.getEnfants()[0].recherche(valeur);
+        }
+        if((this.getEnfants()[1] != null) && (valeur > valGauche && valeur < valDroite)){
+            return this.getEnfants()[1].recherche(valeur);
+        }
+        if((this.getEnfants()[2] != null) && (valeur > valDroite)){
+            return this.getEnfants()[2].recherche(valeur);
+        }
         return false;
     }
 
