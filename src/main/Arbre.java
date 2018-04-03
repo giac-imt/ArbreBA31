@@ -1,13 +1,15 @@
-package structure;
+package main;
 
 public class Arbre {
-    //TODO : commentaires
     //TODO : ajouter feuilles partout
     /**
      * Nombre de clés maximum d'un noeud
      */
-    public static int max_cles;
+    public static int max_cles = 2;
 
+    /**
+     * Est une feuille ?
+     */
     private boolean isFeuille;
 
     /**
@@ -16,10 +18,14 @@ public class Arbre {
     private int[] valeurs = new int[max_cles];
 
     /**
-     * Référence vers ses enfants
+     * Références vers ses enfants
      */
     private Arbre[] enfants = new Arbre[max_cles + 1];
 
+    /**
+     * Constructeur de feuilles
+     * @param valeur : Valeur unique du noeud feuille
+     */
     public Arbre(int valeur){
         this.valeurs[0] = valeur;
         this.isFeuille = true;
@@ -36,6 +42,11 @@ public class Arbre {
         this.isFeuille = false;
     }
 
+    /**
+     * Recherche d'un nombre dans l'arbre
+     * @param valeur : valeur à rechercher
+     * @return vrai si le nombre est présent dans l'arbre
+     */
     public boolean recherche(int valeur) {
         int valGauche = this.getValeurs()[0];
         int valDroite = this.getValeurs()[1];
@@ -61,10 +72,12 @@ public class Arbre {
     **/
     public void parcoursPrefixe(){
         for(int val : this.getValeurs()){
-                System.out.println(val);
+                System.out.print(val + " ");
                 if(isFeuille)
                     break;
         }
+        //Passage à la ligne
+        System.out.println();
         if(this.getEnfants()[0] != null)
             getEnfants()[0].parcoursPrefixe();
         if(this.getEnfants()[1] != null)
@@ -102,9 +115,6 @@ public class Arbre {
     /**
      * Setters
      */
-    public void setValeurs(int[] valeurs) {
-        this.valeurs = valeurs;
-    }
 
     public void setEnfants(Arbre[] enfants) {
         this.enfants = enfants;
