@@ -1,95 +1,98 @@
 package structure;
 
 public class Arbre {
+    /**
+     * Nombre de clés maximum d'un noeud
+     */
+    public static int max_cles;
+
+    private boolean isFeuille;
 
     /**
-     * Valeur présente dans le noeud
+     * Valeurs présentes dans le noeud
      */
-    private int valeur;
+    private int[] valeurs = new int[max_cles];
 
     /**
-     * Référence vers ses 3 enfants
+     * Référence vers ses enfants
      */
-    private Arbre filsGauche, filsMilieu, filsDroit;
+    private Arbre[] enfants = new Arbre[max_cles + 1];
 
-    /**
-     * Constructeur noeud feuille
-     * @param valeur : Valeur à insérer dans le noeud
-     */
-    public Arbre(int valeur) {
-        this.valeur = valeur;
+    public Arbre() {
+    }
+
+    public Arbre(int valeur){
+        this.valeurs[0] = valeur;
+        this.isFeuille = true;
     }
 
     /**
      * Constructeur noeud interne
-     * @param val : Valeur à insérer dans le noeud
-     * @param fg : Fils gauche du noeud
-     * @param fm : Fils du milieu du noeud
-     * @param fd : Fils droit du noeud
+     * @param val : première valeur du noeud
+     * @param val2 : deuxième valeur du noeud
      */
-    public Arbre(int val, Arbre fg, Arbre fm, Arbre fd) {
-
-        this.valeur = val;  // Tableau de cles
-
-        this.filsGauche = fg;
-        this.filsMilieu = fm;
-        this.filsDroit = fd;
+    public Arbre(int val, int val2) {
+        this.valeurs[0] = val;
+        this.valeurs[1] = val2;
+        this.isFeuille = false;
     }
 
     public boolean recherche(int valeur) {
-        if (valeur == getValeur())
-            return true;
-        if ((valeur < getValeur()) && (getFilsGauche() != null))
-            return (getFilsGauche().recherche(valeur));
-        if( (getFilsMilieu() != null) && (getFilsGauche() != null) && (getFilsDroit() != null) && (valeur > getValeur()) && (valeur < getFilsDroit().getValeur()))
-            return (getFilsMilieu().recherche(valeur));
-        if ((valeur > getValeur()) && (getFilsDroit() != null))
-            return (getFilsDroit().recherche(valeur));
+
         return false;
     }
 
     /**
      * Parcours prefixe de l'arbre
-     */
+    **/
     public void parcoursPrefixe(){
-        System.out.println(getValeur());
-        if(getFilsGauche() != null)
-            getFilsGauche().parcoursPrefixe();
-        if(getFilsMilieu() != null)
-            getFilsMilieu().parcoursPrefixe();
-        if(getFilsDroit() != null)
-            getFilsDroit().parcoursPrefixe();
+        for(int val : this.getValeurs()){
+                System.out.println(val);
+                if(isFeuille)
+                    break;
+        }
+        if(this.getEnfants()[0] != null)
+            getEnfants()[0].parcoursPrefixe();
+        if(this.getEnfants()[1] != null)
+            this.getEnfants()[1].parcoursPrefixe();
+        if(this.getEnfants()[2] != null)
+            this.getEnfants()[2].parcoursPrefixe();
     }
 
     /**
      * Parcours postfixe de l'arbre
-     */
+    **/
     public void parcoursPostFixe(){
-        if(getFilsGauche() != null)
-            getFilsGauche().parcoursPrefixe();
-        if(getFilsMilieu() != null)
-            getFilsMilieu().parcoursPrefixe();
-        if(getFilsDroit() != null)
-            getFilsDroit().parcoursPrefixe();
-        System.out.println(getValeur());
-    }/**/
+        if(this.getEnfants()[0] != null)
+            getEnfants()[0].parcoursPrefixe();
+        if(this.getEnfants()[1] != null)
+            this.getEnfants()[1].parcoursPrefixe();
+        if(this.getEnfants()[2] != null)
+            this.getEnfants()[2].parcoursPrefixe();
+        for(int val : this.getValeurs()){
+            System.out.println(val);
+        }
+    }
 
     /**
      * Getters
      */
-    public int getValeur() {
-        return valeur;
+    public int[] getValeurs() {
+        return valeurs;
     }
 
-    public Arbre getFilsGauche() {
-        return filsGauche;
+    public Arbre[] getEnfants() {
+        return enfants;
     }
 
-    public Arbre getFilsMilieu() {
-        return filsMilieu;
+    /**
+     * Setters
+     */
+    public void setValeurs(int[] valeurs) {
+        this.valeurs = valeurs;
     }
 
-    public Arbre getFilsDroit() {
-        return filsDroit;
+    public void setEnfants(Arbre[] enfants) {
+        this.enfants = enfants;
     }
 }
